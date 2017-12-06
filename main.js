@@ -25,7 +25,7 @@ function createWindow() {
   // 然后加载应用的 index.html。
   // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString());
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'build/index.html'),
+    pathname: path.join(__dirname, 'dist/index.html'),
     protocol: 'file:',
     slashes: true,
     // search: querystring.stringify(defaultData)
