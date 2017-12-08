@@ -2,10 +2,10 @@
 // 同步 history 配置
 // ========================================================
 import { useRouterHistory } from 'react-router'
-import createHashHistory from 'history/lib/createHashHistory'
+import createBrowserHistory from 'history/es/createBrowserHistory'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 
-const browserHistory = useRouterHistory(createHashHistory)({
+const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: '', // 相当于 rootPath
   queryKey: false // 去除随机标识符
 })

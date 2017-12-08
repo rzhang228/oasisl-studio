@@ -5,6 +5,8 @@ const src = path.join(rootPath, 'src/web');         // 开发源码目录
 
 let config = require('./webpack.base.conf');
 
+config.devtool = 'eval-source-map';
+
 config.output.filename = '[name].js';
 config.output.chunkFilename = '[id].js';
 
