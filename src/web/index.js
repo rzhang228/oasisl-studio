@@ -2,16 +2,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
-import store from 'STORE'
-import routes from 'ROUTE'
+import { Router, Route, Redirect } from 'react-router-dom'
+import store, { history } from 'STORE'
+import router from 'ROUTE'
 import './index.scss';
 
 const MOUNT_NODE = document.getElementById('root')
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router children={routes} />
+    <Router history={history}>
+      <Route exact path="/" component={require('COMPONENT/Header').default} />
+    </Router>
   </Provider>,
   MOUNT_NODE
 )

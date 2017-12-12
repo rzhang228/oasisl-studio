@@ -1,0 +1,230 @@
+@font-face {
+  font-family: "oasicon";
+  src: url('../fonts/oasicon/oasicon.eot?version=1.0.3');/*IE9*/
+  src: url('../fonts/oasicon/oasicon.eot?#iefix?version=1.0.3') format('embedded-opentype'),/*IE6-IE8*/
+    url('../fonts/oasicon/oasicon.woff?version=1.0.3') format('woff'), /* chrome、firefox */
+    url('../fonts/oasicon/oasicon.ttf?version=1.0.3') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../fonts/oasicon/oasicon.svg#oasicon?version=1.0.3') format('svg');/* iOS 4.1- */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.oasicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'oasicon';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-size:16px;
+    // color: #bdbdbd;
+}
+
+.oasicon-lg {
+  font-size: 96px;
+}
+.oasicon-2x { font-size: 32px; }
+.oasicon-3x { font-size: 48px; }
+.oasicon-4x { font-size: 64px; }
+.oasicon-5x { font-size: 80px; }
+.oasicon-fw {
+  width: 1.2857142857142858em;
+  text-align: center;
+}
+
+.oasicon-QQ,.oasicon-QQ:before {content: "\EA01";}
+.oasicon-account-pwd,.oasicon-account-pwd:before {content: "\EA02";}
+.oasicon-add,.oasicon-add:before {content: "\EA03";}
+.oasicon-additem,.oasicon-additem:before {content: "\EA04";}
+.oasicon-all-fold,.oasicon-all-fold:before {content: "\EA05";}
+.oasicon-all-unfold,.oasicon-all-unfold:before {content: "\EA06";}
+.oasicon-all,.oasicon-all:before {content: "\EA07";}
+.oasicon-anchor,.oasicon-anchor:before {content: "\EA08";}
+.oasicon-arrow-down,.oasicon-arrow-down:before {content: "\EA09";}
+.oasicon-arrow-left,.oasicon-arrow-left:before {content: "\EA0A";}
+.oasicon-arrow-right,.oasicon-arrow-right:before {content: "\EA0B";}
+.oasicon-arrow-up,.oasicon-arrow-up:before {content: "\EA0C";}
+.oasicon-asc,.oasicon-asc:before {content: "\EA0D";}
+.oasicon-audio,.oasicon-audio:before {content: "\EA0E";}
+.oasicon-basic-info,.oasicon-basic-info:before {content: "\EA0F";}
+.oasicon-browser,.oasicon-browser:before {content: "\EA10";}
+.oasicon-calendar,.oasicon-calendar:before {content: "\EA11";}
+.oasicon-calendarNew,.oasicon-calendarNew:before {content: "\EA12";}
+.oasicon-card,.oasicon-card:before {content: "\EA13";}
+.oasicon-chaining,.oasicon-chaining:before {content: "\EA14";}
+.oasicon-click,.oasicon-click:before {content: "\EA15";}
+.oasicon-close,.oasicon-close:before {content: "\EA16";}
+.oasicon-comment-msg,.oasicon-comment-msg:before {content: "\EA17";}
+.oasicon-copy,.oasicon-copy:before {content: "\EA18";}
+.oasicon-data-statistics,.oasicon-data-statistics:before {content: "\EA19";}
+.oasicon-data,.oasicon-data:before {content: "\EA1A";}
+.oasicon-delcheck,.oasicon-delcheck:before {content: "\EA1B";}
+.oasicon-delete,.oasicon-delete:before {content: "\EA1C";}
+.oasicon-delitem,.oasicon-delitem:before {content: "\EA1D";}
+.oasicon-desc,.oasicon-desc:before {content: "\EA1E";}
+.oasicon-detail,.oasicon-detail:before {content: "\EA1F";}
+.oasicon-details,.oasicon-details:before {content: "\EA20";}
+.oasicon-disable,.oasicon-disable:before {content: "\EA21";}
+.oasicon-dot,.oasicon-dot:before {content: "\EA22";}
+.oasicon-down-list,.oasicon-down-list:before {content: "\EA23";}
+.oasicon-down,.oasicon-down:before {content: "\EA24";}
+.oasicon-downfload,.oasicon-downfload:before {content: "\EA25";}
+.oasicon-download,.oasicon-download:before {content: "\EA26";}
+.oasicon-drag-sort,.oasicon-drag-sort:before {content: "\EA27";}
+.oasicon-edit,.oasicon-edit:before {content: "\EA28";}
+.oasicon-email-box,.oasicon-email-box:before {content: "\EA29";}
+.oasicon-enable,.oasicon-enable:before {content: "\EA2A";}
+.oasicon-exception,.oasicon-exception:before {content: "\EA2B";}
+.oasicon-exchange,.oasicon-exchange:before {content: "\EA2C";}
+.oasicon-export,.oasicon-export:before {content: "\EA2D";}
+.oasicon-fail,.oasicon-fail:before {content: "\EA2E";}
+.oasicon-fav-box,.oasicon-fav-box:before {content: "\EA2F";}
+.oasicon-fav,.oasicon-fav:before {content: "\EA30";}
+.oasicon-feedback,.oasicon-feedback:before {content: "\EA31";}
+.oasicon-file,.oasicon-file:before {content: "\EA32";}
+.oasicon-filter,.oasicon-filter:before {content: "\EA33";}
+.oasicon-fold,.oasicon-fold:before {content: "\EA34";}
+.oasicon-folder,.oasicon-folder:before {content: "\EA35";}
+.oasicon-forwarding,.oasicon-forwarding:before {content: "\EA36";}
+.oasicon-full,.oasicon-full:before {content: "\EA37";}
+.oasicon-get-mail,.oasicon-get-mail:before {content: "\EA38";}
+.oasicon-group,.oasicon-group:before {content: "\EA39";}
+.oasicon-groupchat,.oasicon-groupchat:before {content: "\EA3A";}
+.oasicon-help,.oasicon-help:before {content: "\EA3B";}
+.oasicon-history-record,.oasicon-history-record:before {content: "\EA3C";}
+.oasicon-history,.oasicon-history:before {content: "\EA3D";}
+.oasicon-home,.oasicon-home:before {content: "\EA3E";}
+.oasicon-house,.oasicon-house:before {content: "\EA3F";}
+.oasicon-human-relations,.oasicon-human-relations:before {content: "\EA40";}
+.oasicon-icon,.oasicon-icon:before {content: "\EA41";}
+.oasicon-id-card,.oasicon-id-card:before {content: "\EA42";}
+.oasicon-idcard,.oasicon-idcard:before {content: "\EA43";}
+.oasicon-image,.oasicon-image:before {content: "\EA44";}
+.oasicon-import,.oasicon-import:before {content: "\EA45";}
+.oasicon-left-doubble,.oasicon-left-doubble:before {content: "\EA46";}
+.oasicon-list,.oasicon-list:before {content: "\EA47";}
+.oasicon-loading,.oasicon-loading:before {content: "\EA48";}
+.oasicon-love,.oasicon-love:before {content: "\EA49";}
+.oasicon-mail,.oasicon-mail:before {content: "\EA4A";}
+.oasicon-mailbox,.oasicon-mailbox:before {content: "\EA4B";}
+.oasicon-management,.oasicon-management:before {content: "\EA4C";}
+.oasicon-map,.oasicon-map:before {content: "\EA4D";}
+.oasicon-media,.oasicon-media:before {content: "\EA4E";}
+.oasicon-menu,.oasicon-menu:before {content: "\EA4F";}
+.oasicon-minimize,.oasicon-minimize:before {content: "\EA50";}
+.oasicon-modify,.oasicon-modify:before {content: "\EA51";}
+.oasicon-move-top,.oasicon-move-top:before {content: "\EA52";}
+.oasicon-new,.oasicon-new:before {content: "\EA53";}
+.oasicon-newwindow,.oasicon-newwindow:before {content: "\EA54";}
+.oasicon-next,.oasicon-next:before {content: "\EA55";}
+.oasicon-nextstep,.oasicon-nextstep:before {content: "\EA56";}
+.oasicon-notice,.oasicon-notice:before {content: "\EA57";}
+.oasicon-open,.oasicon-open:before {content: "\EA58";}
+.oasicon-opset,.oasicon-opset:before {content: "\EA59";}
+.oasicon-opt-row,.oasicon-opt-row:before {content: "\EA5A";}
+.oasicon-opt,.oasicon-opt:before {content: "\EA5B";}
+.oasicon-ordering,.oasicon-ordering:before {content: "\EA5C";}
+.oasicon-other,.oasicon-other:before {content: "\EA5D";}
+.oasicon-password,.oasicon-password:before {content: "\EA5E";}
+.oasicon-pause,.oasicon-pause:before {content: "\EA5F";}
+.oasicon-phone,.oasicon-phone:before {content: "\EA60";}
+.oasicon-phonebook,.oasicon-phonebook:before {content: "\EA61";}
+.oasicon-play,.oasicon-play:before {content: "\EA62";}
+.oasicon-position-track,.oasicon-position-track:before {content: "\EA63";}
+.oasicon-prev,.oasicon-prev:before {content: "\EA64";}
+.oasicon-prevstep,.oasicon-prevstep:before {content: "\EA65";}
+.oasicon-print,.oasicon-print:before {content: "\EA66";}
+.oasicon-privatechat,.oasicon-privatechat:before {content: "\EA67";}
+.oasicon-publicacount,.oasicon-publicacount:before {content: "\EA68";}
+.oasicon-quit,.oasicon-quit:before {content: "\EA69";}
+.oasicon-ranking,.oasicon-ranking:before {content: "\EA6A";}
+.oasicon-read,.oasicon-read:before {content: "\EA6B";}
+.oasicon-reduce,.oasicon-reduce:before {content: "\EA6C";}
+.oasicon-refresh,.oasicon-refresh:before {content: "\EA6D";}
+.oasicon-registration time,.oasicon-registration time:before {content: "\EA6E";}
+.oasicon-relation-query,.oasicon-relation-query:before {content: "\EA6F";}
+.oasicon-remark,.oasicon-remark:before {content: "\EA70";}
+.oasicon-renren,.oasicon-renren:before {content: "\EA71";}
+.oasicon-right-doubble,.oasicon-right-doubble:before {content: "\EA72";}
+.oasicon-rubbish,.oasicon-rubbish:before {content: "\EA73";}
+.oasicon-save,.oasicon-save:before {content: "\EA74";}
+.oasicon-screen-capture,.oasicon-screen-capture:before {content: "\EA75";}
+.oasicon-search,.oasicon-search:before {content: "\EA76";}
+.oasicon-send-mail,.oasicon-send-mail:before {content: "\EA77";}
+.oasicon-setting,.oasicon-setting:before {content: "\EA78";}
+.oasicon-shipping address,.oasicon-shipping address:before {content: "\EA79";}
+.oasicon-signal,.oasicon-signal:before {content: "\EA7A";}
+.oasicon-skip,.oasicon-skip:before {content: "\EA7B";}
+.oasicon-smg,.oasicon-smg:before {content: "\EA7C";}
+.oasicon-sort,.oasicon-sort:before {content: "\EA7D";}
+.oasicon-stat,.oasicon-stat:before {content: "\EA7E";}
+.oasicon-statistics,.oasicon-statistics:before {content: "\EA7F";}
+.oasicon-succeed,.oasicon-succeed:before {content: "\EA80";}
+.oasicon-succes,.oasicon-succes:before {content: "\EA81";}
+.oasicon-surf-type,.oasicon-surf-type:before {content: "\EA82";}
+.oasicon-swerve,.oasicon-swerve:before {content: "\EA83";}
+.oasicon-system,.oasicon-system:before {content: "\EA84";}
+.oasicon-table,.oasicon-table:before {content: "\EA85";}
+.oasicon-talk,.oasicon-talk:before {content: "\EA86";}
+.oasicon-taobao,.oasicon-taobao:before {content: "\EA87";}
+.oasicon-task,.oasicon-task:before {content: "\EA88";}
+.oasicon-terminal-goods,.oasicon-terminal-goods:before {content: "\EA89";}
+.oasicon-tidy,.oasicon-tidy:before {content: "\EA8A";}
+.oasicon-time-change,.oasicon-time-change:before {content: "\EA8B";}
+.oasicon-time-progress,.oasicon-time-progress:before {content: "\EA8C";}
+.oasicon-timeline,.oasicon-timeline:before {content: "\EA8D";}
+.oasicon-tip-msg,.oasicon-tip-msg:before {content: "\EA8E";}
+.oasicon-tip,.oasicon-tip:before {content: "\EA8F";}
+.oasicon-top,.oasicon-top:before {content: "\EA90";}
+.oasicon-unfav,.oasicon-unfav:before {content: "\EA91";}
+.oasicon-unfold,.oasicon-unfold:before {content: "\EA92";}
+.oasicon-up-down,.oasicon-up-down:before {content: "\EA93";}
+.oasicon-up,.oasicon-up:before {content: "\EA94";}
+.oasicon-upfload,.oasicon-upfload:before {content: "\EA95";}
+.oasicon-upload,.oasicon-upload:before {content: "\EA96";}
+.oasicon-user,.oasicon-user:before {content: "\EA97";}
+.oasicon-vedio,.oasicon-vedio:before {content: "\EA98";}
+.oasicon-virtual-id,.oasicon-virtual-id:before {content: "\EA99";}
+.oasicon-virtual-identity,.oasicon-virtual-identity:before {content: "\EA9A";}
+.oasicon-virtual-open,.oasicon-virtual-open:before {content: "\EA9B";}
+.oasicon-weibo,.oasicon-weibo:before {content: "\EA9C";}
+.oasicon-zhihu,.oasicon-zhihu:before {content: "\EA9D";}
+
+
+.oasis-spin {
+    -webkit-animation: oasis-spin 1s infinite linear;
+    animation: oasis-spin 1s infinite linear
+}
+
+.oasis-pulse {
+    -webkit-animation: oasis-spin 1s infinite steps(8);
+    animation: oasis-spin 1s infinite steps(8)
+}
+
+@-webkit-keyframes oasis-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg)
+    }
+}
+
+@keyframes oasis-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg)
+    }
+}

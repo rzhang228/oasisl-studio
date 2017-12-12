@@ -7,8 +7,8 @@ import userReducer from 'REDUCER/user'
 // 同步的 Reducers（即应用初始化所必需的）
 // ================================
 const syncReducers = {
-  router: routerReducer,
-  userData: userReducer
+  router: routerReducer
+  // userData: userReducer
 }
 
 // ================================

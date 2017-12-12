@@ -3,9 +3,14 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const DashboardPlugin = require('webpack-dashboard/plugin')
+
+const serverConfig = require('./server.config')
 
 //判断当前运行环境是开发模式还是生产模式
-const nodeEnv = process.env.NODE_ENV || 'development'
+const nodeEnv = process.env.NODE_ENV.trim() || 'development'
 const isPro = nodeEnv === 'production'
 
 const src = path.join(__dirname, 'src/web');     // 开发源码目录
@@ -13,9 +18,14 @@ const src = path.join(__dirname, 'src/web');     // 开发源码目录
 console.log('当前运行环境：', isPro ? 'production' : 'development')
 
 let plugins = [
-  /* new webpack.optimize.CommonsChunkPlugin({
+  // new DashboardPlugin(),
+  new CleanWebpackPlugin('dist', {
+    root: __dirname,
+    verbose: false
+  }),
+  new webpack.optimize.CommonsChunkPlugin({  // 抽取公共代码
     name: 'vendor'
-  }), */
+  }),
   new webpack.DefinePlugin({
     // 定义全局变量
     'process.env': {
@@ -30,10 +40,17 @@ let plugins = [
     __WHY_DID_YOU_UPDATE__: false // 是否检测不必要的组件重渲染
   }),
   new HtmlWebpackPlugin({
-    filename: 'app.html',
+    filename: 'index.html',
     template: path.join(src, 'index.html'),
-    chunksSortMode: 'none'
-  })
+    chunks: ['app', 'vendor']
+  }),
+  new CopyWebpackPlugin([ // 复制高度静态资源
+    {
+      from: path.join(src, 'oasisl'),
+      to: path.join(__dirname, 'dist/oasisl'),
+      toType: 'dir'
+    }
+  ])
 ]
 
 if (isPro) {
@@ -57,14 +74,12 @@ if (isPro) {
 } else {
   // app.unshift('react-hot-loader/patch', `webpack-dev-server/client?http://${webpackServerConfig.host}:${webpackServerConfig.port}`, 'webpack/hot/only-dev-server')
   plugins.push(
-    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   )
 }
 
 module.exports = {
-  watch: !isPro,
   devtool: isPro ? 'source-map' : 'inline-source-map',
   entry: {
     vendor: ['react', 'react-dom'],
@@ -95,7 +110,15 @@ module.exports = {
       UTIL: path.join(src, 'utils')
     }
   },
-
+  devServer: {
+    // host: serverConfig.host,
+    // port: serverConfig.port,
+    contentBase: path.join(__dirname, 'dist'),
+    // historyApiFallback: true,
+    // hot: true,
+    // inline: true,
+    // compress: true
+  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
