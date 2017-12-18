@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build": "set NODE_ENV=development && webpack --progress --hide-modules",
-    "dev": "set NODE_ENV=development && webpack-dev-server --inline",
+    "dev": "set NODE_ENV=development && webpack-dev-server --inline --progress",
     "start": "set NODE_ENV=development && electron ."
   }
 }

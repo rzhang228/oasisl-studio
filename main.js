@@ -1,4 +1,4 @@
-const { app, Menu, Tray, Notification, BrowserWindow, ipcMain } = require('electron');
+const { app, Menu, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -6,6 +6,8 @@ const querystring = require('querystring');
 
 const serverConfig = require('./server.config')
 const nodeEnv = process.env.NODE_ENV.trim() || 'development'
+
+require('./src/node')
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -26,22 +28,18 @@ function createWindow() {
     win.show();
   })
 
-  win.maximize();
+  // win.maximize();
 
   // Menu.setApplicationMenu(null);
 
   // 然后加载应用的 index.html。
   // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString());
-  if (nodeEnv === 'development') {
-    win.loadURL('http://' + serverConfig.host + ':' + serverConfig.port)
-  } else {
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
-      protocol: 'file:',
-      slashes: true,
-      // search: querystring.stringify(defaultData)
-    }))
-  }
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'dist/app.html'),
+    protocol: 'file:',
+    slashes: true,
+    // search: querystring.stringify(defaultData)
+  }))
 
   // 打开开发者工具。
   win.webContents.openDevTools();

@@ -39,8 +39,11 @@ let plugins = [
     __COMPONENT_DEVTOOLS__: false, // 是否使用组件形式的 Redux DevTools
     __WHY_DID_YOU_UPDATE__: false // 是否检测不必要的组件重渲染
   }),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new HtmlWebpackPlugin({
-    filename: 'index.html',
+    filename: 'app.html',
     template: path.join(src, 'index.html'),
     chunks: ['app', 'vendor']
   }),
@@ -72,7 +75,7 @@ if (isPro) {
     })
   )
 } else {
-  // app.unshift('react-hot-loader/patch', `webpack-dev-server/client?http://${webpackServerConfig.host}:${webpackServerConfig.port}`, 'webpack/hot/only-dev-server')
+  // plugins.unshift('react-hot-loader/patch', `webpack-dev-server/client?http://${serverConfig.host}:${serverConfig.port}`, 'webpack/hot/only-dev-server')
   plugins.push(
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
@@ -80,6 +83,8 @@ if (isPro) {
 }
 
 module.exports = {
+  target: 'electron-renderer',
+  watch: !isPro,
   devtool: isPro ? 'source-map' : 'inline-source-map',
   entry: {
     vendor: ['react', 'react-dom'],
@@ -91,15 +96,10 @@ module.exports = {
     publicPath: './',
     chunkFilename: '[name].js'
   },
-  // BASE_URL是全局的api接口访问地址
   plugins,
   // alias是配置全局的路径入口名称，只要涉及到下面配置的文件路径，可以直接用定义的单个字母表示整个路径
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: [
-      path.resolve(__dirname, 'node_modules'),
-      src
-    ],
     alias: {
       COMPONENT: path.join(src, 'components'),
       ACTION: path.join(src, 'redux/actions'),
@@ -111,55 +111,57 @@ module.exports = {
     }
   },
   devServer: {
-    // host: serverConfig.host,
-    // port: serverConfig.port,
-    contentBase: path.join(__dirname, 'dist'),
-    // historyApiFallback: true,
-    // hot: true,
-    // inline: true,
-    // compress: true
+    historyApiFallback: true,
+    hot: true,
+    compress: true,
+    host: serverConfig.host,
+    port: serverConfig.port,
+    publicPath: '/',
+    index: 'app.html'
   },
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
-    }, {
-      test: /\.html$/,
-      loader: 'html-loader'
-    }, {
-      test: /\.(scss|css)$/,
-      use: ['style-loader', {
-        loader: 'css-loader',
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
+        test: /\.html$/,
+        loader: 'html-loader'
+      }, {
+        test: /\.(scss|css)$/,
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1
+          }
+        }, {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                require('precss')(),
+                require('autoprefixer')()
+              ]
+            }
+          }]
+      }, {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'url-loader',
         options: {
-          importLoaders: 1
+          limit: 10240, // 10KB 以下使用 base64
+          name: 'img/[name]-[hash:6].[ext]'
         }
       }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: (loader) => [
-              require('precss')(),
-              require('autoprefixer')()
-            ]
-          }
-        }]
-    }, {
-      test: /\.(png|jpe?g|gif|svg)$/,
-      loader: 'url-loader',
-      options: {
-        limit: 10240, // 10KB 以下使用 base64
-        name: 'img/[name]-[hash:6].[ext]'
+        test: /\.(woff2?|eot|ttf|otf)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240, // 10KB 以下使用 base64
+          name: 'fonts/[name]-[hash:6].[ext]'
+        }
       }
-    }, {
-      test: /\.(woff2?|eot|ttf|otf)$/,
-      loader: 'url-loader',
-      options: {
-        limit: 10240, // 10KB 以下使用 base64
-        name: 'fonts/[name]-[hash:6].[ext]'
-      }
-    }]
+    ]
   }
 }

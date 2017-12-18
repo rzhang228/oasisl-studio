@@ -1,4 +1,36 @@
 .header {
-  height: 50px;
+  height: 46px;
   background: #3D474C;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  .operate {
+    float: left;
+    margin-left: 5px;
+    margin-top: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .operate-wrapper {
+      padding: 2px 12px 2px 7px;
+      
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .operate-icon {
+      float: left;
+      height: 26px;
+      width: 26px;
+      background-color: #323639;
+      padding: 0 5px;
+      text-align: center;
+      line-height: 26px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .operate-name {
+      line-height: 26px;
+    }
+  }
 }
