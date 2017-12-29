@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
+import { create } from 'UTIL/menifest/util'
 import './index.scss'
 
+@connect(
+  ({ fileObj }) => ({ fileObj }),
+  require('ACTION/file').default
+)
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -24,10 +30,19 @@ class Header extends React.Component {
           color: '#FFA430',
           fn: (event) => {
             ipcRenderer.once('receive-dir', (event, fileObj) => {
-              console.log(fileObj)
+              console.log(this.props)
               this.props.setFile(fileObj)
+              console.log(this.props)
             })
             ipcRenderer.send('open-dir')
+          }
+        },
+        {
+          name: '新建',
+          icon: 'oasicon oasicon-folder',
+          color: '#FFA430',
+          fn: (event) => {
+            console.log(create())
           }
         }
       ]

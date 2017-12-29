@@ -12,7 +12,7 @@ const MOUNT_NODE = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route exact path="/" component={require('COMPONENT/Header').default} />
+      { router }
     </Router>
   </Provider>,
   MOUNT_NODE

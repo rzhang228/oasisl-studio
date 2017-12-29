@@ -1,13 +1,15 @@
+import React, { Component } from 'react'
+import Header from 'COMPONENT/Header'
+import File from 'COMPONENT/File'
+
 export default () => {
-  const { header, file } = this.props
-  console.log(111)
   return (
     <div>
       <div className="header-container">
-        { header }
+        <Header />
       </div>
       <div className="file-container">
-        { file }
+        <File />
       </div>
     </div>
   )
