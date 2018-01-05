@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ipcRenderer } from 'electron'
-import { create } from 'UTIL/menifest/util'
+import services from 'SERVICE'
 import './index.scss'
+
+import VNodeTree from 'UTIL/menifest/VNodeTree'
 
 @connect(
   ({ fileObj }) => ({ fileObj }),
@@ -18,10 +19,9 @@ class Header extends React.Component {
           icon: 'glyphicon glyphicon-file',
           color: '#DDEAF1',
           fn: (event) => {
-            ipcRenderer.once('receive-file', (event, file) => {
+            services.trigger('open-file', (event, file) => {
               console.log(file)
             })
-            ipcRenderer.send('open-file')
           }
         },
         {
@@ -29,12 +29,11 @@ class Header extends React.Component {
           icon: 'oasicon oasicon-folder',
           color: '#FFA430',
           fn: (event) => {
-            ipcRenderer.once('receive-dir', (event, fileObj) => {
-              console.log(this.props)
+            services.trigger('open-dir', (event, fileObj) => {
+              console.log(this.props.fileObj)
               this.props.setFile(fileObj)
-              console.log(this.props)
+              console.log(this.props.fileObj)
             })
-            ipcRenderer.send('open-dir')
           }
         },
         {
@@ -42,7 +41,8 @@ class Header extends React.Component {
           icon: 'oasicon oasicon-folder',
           color: '#FFA430',
           fn: (event) => {
-            console.log(create())
+            let vNodeTree = VNodeTree.create()
+            console.log(vNodeTree)
           }
         }
       ]

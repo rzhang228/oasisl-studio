@@ -2,18 +2,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, Route, Redirect } from 'react-router-dom'
-import store, { history } from 'STORE'
-import router from 'ROUTE'
-import './index.scss';
+// import { Router, Route, Redirect } from 'react-router-dom'
+import store/* , { history } */ from 'STORE'
+// import router from 'ROUTE'
+import App from 'COMPONENT/App'
+import './index.scss'
 
 const MOUNT_NODE = document.getElementById('root')
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    {/* <Router history={history}>
       { router }
-    </Router>
+    </Router> */}
+    <App></App>
   </Provider>,
   MOUNT_NODE
 )

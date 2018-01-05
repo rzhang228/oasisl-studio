@@ -6,7 +6,9 @@ export default {
   "moduleChineseName": "",  // 中文名，用于展示
   "attr": {},               // type=1：当前dom属性；否则：最外层dom属性
   "text": "",               // 标签内文本内容
-  "style": {},              // type=1：当前dom样式对象；否则：最外层dom样式对象
+  // "style": {},              // type=1：当前dom样式对象；否则：最外层dom样式对象（仅表示行内样式）
   "option": {},             // type=1,2：为空对象；否则：为配置项（包含默认与已配置字段）
   "children": []
 }
+
+//修改默认配置项需要修改此文件同时修改VNode.js中的getJSON方法

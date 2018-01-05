@@ -2,9 +2,11 @@
 {
   "presets": [
     [
-      "es2015",
+      "env",
       {
-        "modules": false
+        "targets": {
+          "chrome": 58
+        }
       }
     ],
     "react",

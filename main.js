@@ -1,19 +1,19 @@
-const { app, Menu, BrowserWindow } = require('electron');
-const path = require('path');
-const url = require('url');
-const fs = require('fs');
-const querystring = require('querystring');
+const path = require('path')
+const url = require('url')
+const fs = require('fs')
+const querystring = require('querystring')
 
-const serverConfig = require('./server.config')
-const nodeEnv = process.env.NODE_ENV.trim() || 'development'
+const { app, Menu, BrowserWindow } = require('electron')
 
-require('./src/node')
+const config = require('./build/config')
+
+require('./src/main')
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
-let win;
-// let iconPath = path.join(__dirname, 'icon.ico');
-// let timeout;
+let win
+// let iconPath = path.join(__dirname, 'icon.ico')
+// let timeout
 
 function createWindow() {
   // 创建浏览器窗口。
@@ -25,24 +25,32 @@ function createWindow() {
   })
 
   win.once('ready-to-show', () => {
-    win.show();
+    win.show()
   })
 
-  // win.maximize();
+  // win.maximize()
 
-  // Menu.setApplicationMenu(null);
+  // Menu.setApplicationMenu(null)
 
   // 然后加载应用的 index.html。
-  // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString());
+  // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString())
+  // win.loadURL("http://localhost:8080/")
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'dist/app.html'),
+    pathname: path.join(__dirname, 'dist/index.html'),
     protocol: 'file:',
     slashes: true,
     // search: querystring.stringify(defaultData)
   }))
 
+  if (process.env.NODE_ENV.trim() === 'development') {
+    const client = require('electron-connect').client
+    client.create(win)
+    BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)
+    BrowserWindow.addDevToolsExtension(config.ReduxDevToolExtensionPath)
+  }
+
   // 打开开发者工具。
-  win.webContents.openDevTools();
+  win.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {

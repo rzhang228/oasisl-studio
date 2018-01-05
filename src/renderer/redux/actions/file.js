@@ -1,4 +1,3 @@
-// import msgService from 'SERVICE/msgService'
 // ================================
 // Action Type
 // ================================
@@ -7,12 +6,10 @@ const SET_FILE = 'SET_FILE'
 // ================================
 // Action Creator
 // ================================
-const setFile = fileObj => dispatch => {
-  dispatch({
-    type: SET_FILE,
-    payload: fileObj
-  })
-}
+const setFile = fileObj => ({
+  type: SET_FILE,
+  payload: fileObj
+})
 
 /* default 导出所有 Action Creators */
 export default {

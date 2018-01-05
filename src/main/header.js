@@ -1,7 +1,7 @@
-const { ipcMain, dialog } = require('electron')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
+const { ipcMain, dialog } = require('electron')
 
 const desktopPath = path.join(os.homedir(), 'Desktop')
 
@@ -26,6 +26,12 @@ ipcMain.on('open-dir', async (event) => {
     defaultPath: desktopPath,
     properties: ['openDirectory']
   })
+  let pathArr = dir[0].split('\\')
+  let stats = fs.statSync(dir[0])
+  ret.name = pathArr[pathArr.length - 1]
+  ret.path = dir[0]
+  ret.stats = stats
+  ret.isDirectory = stats.isDirectory()
   dirContent = fs.readdirSync(dir[0])
   for (let file of dirContent) {
     let stats = fs.statSync(path.join(dir[0], file))
@@ -33,12 +39,9 @@ ipcMain.on('open-dir', async (event) => {
       name: file,
       path: path.join(dir[0], file),
       stats,
+      isDirectory: stats.isDirectory(),
       children: []
     })
   }
-  let pathArr = dir[0].split('\\')
-  ret.name = pathArr[pathArr.length - 1]
-  ret.path = dir[0]
-  ret.stats = fs.statSync(dir[0])
   event.sender.send('receive-dir', ret)
 })
