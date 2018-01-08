@@ -43,14 +43,17 @@ function createWindow() {
   }))
 
   if (process.env.NODE_ENV.trim() === 'development') {
+    // 链接electron-connect
     const client = require('electron-connect').client
     client.create(win)
+
+    // 加载react-devtool和redux-devtool
     BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)
     BrowserWindow.addDevToolsExtension(config.ReduxDevToolExtensionPath)
-  }
 
-  // 打开开发者工具。
-  win.webContents.openDevTools()
+    // 打开开发者工具。
+    win.webContents.openDevTools()
+  }
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {

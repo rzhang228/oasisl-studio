@@ -6,7 +6,8 @@
   "scripts": {
     "build-dev": "webpack --progress --watch --hide-modules --config ./build/webpack.dev.conf",
     "dev": "webpack-dev-server --watch --config ./build/webpack.dev.conf",
-    "start-dev": "set NODE_ENV=development && node main.dev"
+    "start-dev": "set NODE_ENV=development && node main.dev",
+    "start": "set NODE_ENV=production && webpack --progress --hide-modules --config ./build/webpack.prod.conf && electron ."
   },
   "dependencies": {
     "electron": "^1.7.9",
