@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+// import { routerReducer } from 'react-router-redux'
 import store from 'STORE'
 import fileReducer from 'REDUCER/file'
 
@@ -7,7 +7,7 @@ import fileReducer from 'REDUCER/file'
 // 同步的 Reducers（即应用初始化所必需的）
 // ================================
 const syncReducers = {
-  router: routerReducer,
+  // router: routerReducer,
   fileObj: fileReducer
   // userData: userReducer
 }
@@ -32,7 +32,8 @@ export function createRootReducer() {
  * @param  {String}   key
  * @param  {Function} reducer
  */
-export function injectReducer(key, reducer) {
+/* export function injectReducer(key, reducer) {
   asyncReducers[key] = reducer
   store.replaceReducer(createRootReducer()) // 替换当前的 rootReducer
 }
+ */

@@ -1,0 +1,53 @@
+.app {
+  position: absolute;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.header {
+  flex-grow: 0;
+}
+
+.body {
+  display: flex;
+  flex-grow: 1;
+
+  .left {
+    width: 250px;
+
+    .elements-container {
+      height: 60%;
+    }
+  
+    .file-container {
+      position: relative;
+      flex-grow: 1;
+    }
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .page-container {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .devtool-container {
+      height: 250px;
+    }
+  }
+
+  .right {
+    width: 200px;
+
+    .properties-container {
+      height: 100%;
+    }
+  }
+}

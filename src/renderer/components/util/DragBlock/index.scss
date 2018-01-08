@@ -1,0 +1,25 @@
+.dragWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .dragBar {
+    background: transparent;
+
+    &.horizontal {
+      position: absolute;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      cursor: ns-resize;
+    }
+  
+    &.vertical {
+      position: absolute;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      cursor: ew-resize;
+    }
+  }
+}

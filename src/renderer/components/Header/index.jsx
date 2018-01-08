@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import services from 'SERVICE'
-import './index.scss'
+import style from './index.scss'
 
 import VNodeTree from 'UTIL/menifest/VNodeTree'
 
@@ -30,9 +30,7 @@ class Header extends React.Component {
           color: '#FFA430',
           fn: (event) => {
             services.trigger('open-dir', (event, fileObj) => {
-              console.log(this.props.fileObj)
               this.props.setFile(fileObj)
-              console.log(this.props.fileObj)
             })
           }
         },
@@ -50,14 +48,14 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <div className="header clearfix">
+      <div className={style['header'] + ' clearfix'}>
         {
           this.state.operateList.map((operate, index) => {
             return (
-              <div className="operate" key={operate.name} onClick={operate.fn}>
-                <div className="operate-wrapper clearfix">
-                  <i className={'operate-icon ' + operate.icon} style={{ color: operate.color }}></i>
-                  <span className="operate-name">{operate.name}</span>
+              <div className={style['operate']} key={operate.name} onClick={operate.fn}>
+                <div className={style['operate-wrapper'] + ' clearfix'}>
+                  <i className={style['operate-icon'] + ' ' + operate.icon} style={{ color: operate.color }}></i>
+                  <span className={style['operate-name']}>{operate.name}</span>
                 </div>
               </div>
             )

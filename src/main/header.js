@@ -11,7 +11,7 @@ ipcMain.on('open-file', async (event) => {
     defaultPath: desktopPath,
     properties: ['openFile']
   })
-  event.sender.send('receive-file', fs.readFileSync(filePaths[0]).toString())
+  event.sender.send('open-file-reply', fs.readFileSync(filePaths[0]).toString())
 })
 
 ipcMain.on('open-dir', async (event) => {
@@ -43,5 +43,5 @@ ipcMain.on('open-dir', async (event) => {
       children: []
     })
   }
-  event.sender.send('receive-dir', ret)
+  event.sender.send('open-dir-reply', ret)
 })

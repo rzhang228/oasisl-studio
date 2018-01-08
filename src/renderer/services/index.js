@@ -5,14 +5,14 @@ const event = new EventEmitter()
 
 event.on('open-file', (cb) => {
   ipcRenderer.send('open-file')
-  ipcRenderer.once('receive-file', (event, file) => {
+  ipcRenderer.once('open-file-reply', (event, file) => {
     cb(event, file)
   })
 })
 
 event.on('open-dir', (cb) => {
   ipcRenderer.send('open-dir')
-  ipcRenderer.once('receive-dir', (event, fileObj) => {
+  ipcRenderer.once('open-dir-reply', (event, fileObj) => {
     cb(event, fileObj)
   })
 })
