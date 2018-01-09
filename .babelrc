@@ -1,4 +1,3 @@
-//babel配置文件，不需要做修改，因为都配置好了
 {
   "presets": [
     [
@@ -10,10 +9,7 @@
       }
     ],
     "react",
-    "stage-0",
-    "stage-1",
-    "stage-2",
-    "stage-3"
+    "stage-0"
   ],
   "plugins": [
     [
@@ -25,11 +21,7 @@
         "moduleName": "babel-runtime"
       }
     ],
-    // "react-hot-loader/babel",
-    "transform-decorators-legacy",
-    "transform-async-to-generator",
-    "transform-do-expressions",
-    "syntax-do-expressions"
+    "transform-decorators-legacy"
   ],
   "comments": false
 }

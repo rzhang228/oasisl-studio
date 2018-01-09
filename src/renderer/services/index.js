@@ -1,16 +1,16 @@
 const { EventEmitter } = require('events')
 const { ipcRenderer } = require('electron')
 
-const event = new EventEmitter()
+const service = new EventEmitter()
 
-event.on('open-file', (cb) => {
+service.on('open-file', (cb) => {
   ipcRenderer.send('open-file')
   ipcRenderer.once('open-file-reply', (event, file) => {
     cb(event, file)
   })
 })
 
-event.on('open-dir', (cb) => {
+service.on('open-dir', (cb) => {
   ipcRenderer.send('open-dir')
   ipcRenderer.once('open-dir-reply', (event, fileObj) => {
     cb(event, fileObj)
@@ -19,14 +19,14 @@ event.on('open-dir', (cb) => {
 
 export default {
   on(name, cb) {
-    event.on(name, cb)
+    service.on(name, cb)
   },
 
   once(name, cb) {
-    event.once(name, cb)
+    service.once(name, cb)
   },
 
   trigger(name, ...args) {
-    event.emit(name, ...args)
+    service.emit(name, ...args)
   }
 }

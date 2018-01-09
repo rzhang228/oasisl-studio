@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import createContainer from 'UTIL/createContainer'
 import services from 'SERVICE'
+import fileAction from 'ACTION/file'
+import VNodeTree from 'UTIL/menifest/VNodeTree'
 import style from './index.scss'
 
-import VNodeTree from 'UTIL/menifest/VNodeTree'
-
-@connect(
+const connector = createContainer(
   ({ fileObj }) => ({ fileObj }),
-  require('ACTION/file').default
+  fileAction
 )
-class Header extends React.Component {
+
+class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +21,7 @@ class Header extends React.Component {
           name: '打开',
           icon: 'glyphicon glyphicon-file',
           color: '#DDEAF1',
-          fn: (event) => {
+          fn: () => {
             services.trigger('open-file', (event, file) => {
               console.log(file)
             })
@@ -28,7 +31,7 @@ class Header extends React.Component {
           name: '打开文件夹',
           icon: 'oasicon oasicon-folder',
           color: '#FFA430',
-          fn: (event) => {
+          fn: () => {
             services.trigger('open-dir', (event, fileObj) => {
               this.props.setFile(fileObj)
             })
@@ -38,8 +41,8 @@ class Header extends React.Component {
           name: '新建',
           icon: 'oasicon oasicon-folder',
           color: '#FFA430',
-          fn: (event) => {
-            let vNodeTree = VNodeTree.create()
+          fn: () => {
+            const vNodeTree = VNodeTree.create()
             console.log(vNodeTree)
           }
         }
@@ -48,22 +51,29 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <div className={style['header'] + ' clearfix'}>
+      <div className={`${style['header']} clearfix`}>
         {
-          this.state.operateList.map((operate, index) => {
-            return (
-              <div className={style['operate']} key={operate.name} onClick={operate.fn}>
-                <div className={style['operate-wrapper'] + ' clearfix'}>
-                  <i className={style['operate-icon'] + ' ' + operate.icon} style={{ color: operate.color }}></i>
-                  <span className={style['operate-name']}>{operate.name}</span>
-                </div>
+          this.state.operateList.map(operate => (
+            <div
+              className={style['operate']}
+              key={operate.name}
+              onClick={operate.fn}
+              role="presentation"
+            >
+              <div className={`${style['operate-wrapper']} clearfix`}>
+                <i className={`${style['operate-icon']} ${operate.icon}`} style={{ color: operate.color }} />
+                <span className={style['operate-name']}>{operate.name}</span>
               </div>
-            )
-          })
+            </div>
+          ))
         }
       </div>
     )
   }
 }
 
-export default Header;
+Header.propTypes = {
+  setFile: PropTypes.func.isRequired
+}
+
+export default connector(Header)

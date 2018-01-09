@@ -1,4 +1,5 @@
 import VNode from './VNode'
+import defaultJson from './default.json'
 
 /**
  * 一个VNodeTree对应一个静态页
@@ -6,7 +7,6 @@ import VNode from './VNode'
  * @class VNodeTree
  */
 class VNodeTree {
-
   constructor(idNext, tree, map) {
     this.idNext = idNext
     this.tree = tree
@@ -19,7 +19,7 @@ class VNodeTree {
    * @memberof VNodeTree
    */
   static create() {
-    return VNodeTree.parseJSON(require('./default.json'))
+    return VNodeTree.parseJSON(defaultJson)
   }
 
   /**
@@ -105,26 +105,25 @@ class VNodeTree {
    * @returns 
    * @memberof VNodeTree
    */
-  static parseJSON(json) {
+  static parseJSON(data) {
+    let mainJson = data
     if (typeof json === 'string')
-      json = JSON.parse(json)
+      mainJson = JSON.parse(mainJson)
 
     let maxId = 0
-    let map = {}
-
-    let node = convert(json)
+    const map = {}
 
     function convert(json) {
-      let option = Object.assign({}, json)
+      const option = Object.assign({}, json)
       delete option.children
-      let vNode = new VNode(option)
+      const vNode = new VNode(option)
       maxId = Math.max(+option.id, maxId)
       map[option.id] = vNode
 
       if (Array.isArray(json['children']) && json['children'].length > 0) {
-        let children = []
-        for (let item of json['children']) {
-          let child = convert(item)
+        const children = []
+        for (const item of json['children']) {
+          const child = convert(item)
           children.push(child)
         }
         vNode.children = children
@@ -133,7 +132,11 @@ class VNodeTree {
       return vNode
     }
 
-    return new VNodeTree(++maxId, node, map)
+    const node = convert(mainJson)
+
+    maxId += 1
+
+    return new VNodeTree(maxId, node, map)
   }
 
   /**
@@ -171,8 +174,10 @@ class VNodeTree {
   toHTMLTreeAndHTML() {
     // TODO
     return {
-      html: '',  // 写入临时文件用于展示
-      htmlTree: {  // 需要写一个组件解析此对象，生成类似开发者工具的dom结构展示
+      // 写入临时文件用于展示
+      html: '',
+      // 需要写一个组件解析此对象，生成类似开发者工具的dom结构展示
+      htmlTree: {
         string: '',
         hasClose: true,
         id: '',

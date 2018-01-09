@@ -1,9 +1,10 @@
 /**
  * React 不像 Angular/Vue 等具备双向绑定能力
  * 因此需要手动监听输入框 change 事件同步 state
- * 您可使用成熟的 redux-form(https://github.com/erikras/redux-form) 替代
+ * 可使用成熟的 redux-form(https://github.com/erikras/redux-form) 替代
  * @param  {DOM Event} evt
  *
+ * 也可直接使用此函数
  * 使用例子：
  * 例子1：直接使用
  * <input

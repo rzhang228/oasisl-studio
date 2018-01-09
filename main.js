@@ -13,7 +13,6 @@ require('./src/main')
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
 let win
 // let iconPath = path.join(__dirname, 'icon.ico')
-// let timeout
 
 function createWindow() {
   // 创建浏览器窗口。
@@ -28,10 +27,6 @@ function createWindow() {
     win.show()
   })
 
-  // win.maximize()
-
-  // Menu.setApplicationMenu(null)
-
   // 然后加载应用的 index.html。
   // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString())
   // win.loadURL("http://localhost:8080/")
@@ -42,17 +37,21 @@ function createWindow() {
     // search: querystring.stringify(defaultData)
   }))
 
-  if (process.env.NODE_ENV.trim() === 'development') {
-    // 链接electron-connect
-    const client = require('electron-connect').client
-    client.create(win)
-
-    // 加载react-devtool和redux-devtool
-    BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)
-    BrowserWindow.addDevToolsExtension(config.ReduxDevToolExtensionPath)
-
-    // 打开开发者工具。
-    win.webContents.openDevTools()
+  switch(process.env.NODE_ENV.trim()) {
+    case 'development':
+      // 链接electron-connect
+      const client = require('electron-connect').client
+      client.create(win)
+      // 加载react-devtool和redux-devtool
+      BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)
+      BrowserWindow.addDevToolsExtension(config.ReduxDevToolExtensionPath)
+      // 打开开发者工具。
+      win.webContents.openDevTools()
+      break
+    case 'production':
+      win.maximize()
+      Menu.setApplicationMenu(null)
+      break
   }
 
   // 当 window 被关闭，这个事件会被触发。

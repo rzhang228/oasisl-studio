@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import fileAction from 'ACTION/file'
+import createContainer from 'UTIL/createContainer'
 import style from './index.scss'
 
-@connect(
+const connector = createContainer(
   ({ fileObj }) => ({ fileObj }),
-  require('ACTION/file').default
+  fileAction
 )
-class File extends React.Component {
+
+class File extends Component {
   render() {
     console.log(this.props.fileObj)
     return (
-      <div className={style['file-container']}></div>
+      <div className={style['file-container']} />
     )
   }
 }
 
-export default File;
+File.propTypes = {
+  fileObj: PropTypes.object.isRequired
+}
+
+export default connector(File)

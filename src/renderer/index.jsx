@@ -15,7 +15,7 @@ ReactDOM.render(
     {/* <Router history={history}>
       { router }
     </Router> */}
-    <App></App>
+    <App />
   </Provider>,
   MOUNT_NODE
 )

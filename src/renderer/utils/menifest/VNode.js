@@ -6,7 +6,6 @@ import defaultOption from './default'
  * @class VNode
  */
 class VNode {
-
   constructor(option) {
     if (!option['id'])
       throw new Error('id is required')
@@ -19,24 +18,21 @@ class VNode {
   /**
    * 连同children转为JSON
    * 
-   * @returns 
+   * @returns
    * @memberof VNode
    */
   toJSON() {
-
-    return convert(this)
-
     function convert(vNode) {
-      let json = vNode.getJSON()
+      const json = vNode.getJSON()
       json.children = []
 
-      if (vNode.children.length > 0) {
-        for (let child of vNode.children) {
+      if (vNode.children.length > 0)
+        for (const child of vNode.children)
           json.children.push(convert(child))
-        }
-      }
       return json
     }
+
+    return convert(this)
   }
 
   /**
@@ -48,7 +44,7 @@ class VNode {
   getJSON() {
     // 这样写会报错，不晓得为什么
     // let json = { id, type, tagName, moduleName, moduleChineseName, attr, text, style, option } = this
-    let json = new Object()
+    const json = {}
     json.id = this.id
     json.type = this.type
     json.tagName = this.tagName

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import style from './index.scss'
 
-class Page extends React.Component {
+class Page extends Component {
   render() {
     return (
-      <div className={style['page-container']}></div>
+      <div className={style['page-container']} />
     )
   }
 }
 
-export default Page;
+export default Page

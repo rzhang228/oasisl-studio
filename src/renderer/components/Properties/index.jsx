@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import style from './index.scss'
 
-class Propertites extends React.Component {
+class Propertites extends Component {
   render() {
     return (
-      <div className={style['propertites-container']}></div>
+      <div className={style['propertites-container']} />
     )
   }
 }
 
-export default Propertites;
+export default Propertites

@@ -1,27 +1,27 @@
-import { applyMiddleware/* , compose */, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createRootReducer } from 'REDUCER'
+import createRootReducer from 'REDUCER'
 import middlewares from './middlewares'
-// import enhancers from './enhancers'
-// import syncHistoryWithStore from './syncHistoryWithStore'
 
 // ======================================================
 // 实例化 Store
 // ======================================================
-const store = createStore(
+const args = [
   createRootReducer(),
-  {},
-  /* compose(
-    applyMiddleware(...middlewares),
-    // ...enhancers
-  ) */
-  composeWithDevTools(
-    applyMiddleware(...middlewares),
-  )
-)
-export default store
+  {}
+]
 
-// ======================================================
-// 增强版 history
-// ======================================================
-// export const history = syncHistoryWithStore(store)
+switch (process.env.NODE_ENV) {
+  case 'development':
+    args.push(composeWithDevTools(applyMiddleware(...middlewares)))
+    break
+  case 'production':
+    args.push(compose(applyMiddleware(...middlewares)))
+    break
+  default:
+    throw new Error('need NODE_ENV')
+}
+
+const store = createStore.apply(this, args)
+
+export default store
