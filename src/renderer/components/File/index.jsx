@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import fileAction from 'ACTION/file'
 import createContainer from 'UTIL/createContainer'
-import style from './index.scss'
+import './index.scss'
 
 const connector = createContainer(
   ({ fileObj }) => ({ fileObj }),
@@ -14,7 +14,7 @@ class File extends Component {
   render() {
     console.log(this.props.fileObj)
     return (
-      <div className={style['file-container']} />
+      <div className="file-container" />
     )
   }
 }

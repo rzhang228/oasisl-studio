@@ -1,13 +1,11 @@
 const path = require('path')
 const url = require('url')
-const fs = require('fs')
-const querystring = require('querystring')
 
 const { app, Menu, BrowserWindow } = require('electron')
 
 const config = require('./build/config')
 
-require('./src/main')
+require('./dist/main')
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -27,30 +25,29 @@ function createWindow() {
     win.show()
   })
 
-  // 然后加载应用的 index.html。
-  // let defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/cache')).toString())
   // win.loadURL("http://localhost:8080/")
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'dist/index.html'),
+    pathname: path.join(__dirname, 'dist/renderer/index.html'),
     protocol: 'file:',
-    slashes: true,
-    // search: querystring.stringify(defaultData)
+    slashes: true
   }))
 
-  switch(process.env.NODE_ENV.trim()) {
+  switch (process.env.NODE_ENV.trim()) {
     case 'development':
       // 链接electron-connect
-      const client = require('electron-connect').client
+      const { client } = require('electron-connect')
       client.create(win)
       // 加载react-devtool和redux-devtool
       BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)
       BrowserWindow.addDevToolsExtension(config.ReduxDevToolExtensionPath)
-      // 打开开发者工具。
+      // 打开开发者工具
       win.webContents.openDevTools()
       break
     case 'production':
       win.maximize()
       Menu.setApplicationMenu(null)
+      break
+    default:
       break
   }
 
@@ -72,15 +69,13 @@ app.on('ready', createWindow)
 app.on('window-all-closed', () => {
   // 在 macOS 上，除非用户用 Cmd + Q 确定地退出，
   // 否则绝大部分应用及其菜单栏会保持激活。
-  if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin')
     app.quit()
-  }
 })
 
 app.on('activate', () => {
   // 在macOS上，当单击dock图标并且没有其他窗口打开时，
   // 通常在应用程序中重新创建一个窗口。
-  if (win === null) {
+  if (win === null)
     createWindow()
-  }
 })

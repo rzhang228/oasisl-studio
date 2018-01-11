@@ -18,11 +18,11 @@
   .left {
     width: 250px;
 
-    .elements-container {
+    .elements-wrapper {
       height: 60%;
     }
   
-    .file-container {
+    .file-wrapper {
       position: relative;
       flex-grow: 1;
     }
@@ -33,12 +33,12 @@
     flex-direction: column;
     flex-grow: 1;
 
-    .page-container {
+    .page-wrapper {
       position: relative;
       flex-grow: 1;
     }
 
-    .devtool-container {
+    .devtool-wrapper {
       height: 250px;
     }
   }
@@ -46,7 +46,7 @@
   .right {
     width: 200px;
 
-    .properties-container {
+    .properties-wrapper {
       height: 100%;
     }
   }

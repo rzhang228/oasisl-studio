@@ -17,6 +17,13 @@ service.on('open-dir', (cb) => {
   })
 })
 
+service.on('create-previewHTML', (html, cb) => {
+  ipcRenderer.send('create-previewHTML', html)
+  ipcRenderer.once('create-previewHTML-reply', (event, path) => {
+    cb(path)
+  })
+})
+
 export default {
   on(name, cb) {
     service.on(name, cb)

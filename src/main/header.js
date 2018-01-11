@@ -6,7 +6,7 @@ const { ipcMain, dialog } = require('electron')
 const desktopPath = path.join(os.homedir(), 'Desktop')
 
 ipcMain.on('open-file', async (event) => {
-  let filePaths = await dialog.showOpenDialog({
+  const filePaths = await dialog.showOpenDialog({
     title: '选择文件',
     defaultPath: desktopPath,
     properties: ['openFile']
@@ -15,33 +15,45 @@ ipcMain.on('open-file', async (event) => {
 })
 
 ipcMain.on('open-dir', async (event) => {
-  let ret = {
+  const ret = {
     name: '',
     path: '',
     stats: {},
     children: []
-  }, dir, dirContent
-  dir = await dialog.showOpenDialog({
+  }
+  const dirList = await dialog.showOpenDialog({
     title: '选择文件夹',
     defaultPath: desktopPath,
     properties: ['openDirectory']
   })
-  let pathArr = dir[0].split('\\')
-  let stats = fs.statSync(dir[0])
+  const [dir] = dirList
+  const pathArr = dir.split('\\')
+  const stats = fs.statSync(dir)
   ret.name = pathArr[pathArr.length - 1]
-  ret.path = dir[0]
+  ret.path = dir
   ret.stats = stats
   ret.isDirectory = stats.isDirectory()
-  dirContent = fs.readdirSync(dir[0])
-  for (let file of dirContent) {
-    let stats = fs.statSync(path.join(dir[0], file))
+  const dirContent = fs.readdirSync(dir)
+  for (const file of dirContent) {
+    const tempStats = fs.statSync(path.join(dir, file))
     ret.children.push({
       name: file,
-      path: path.join(dir[0], file),
-      stats,
-      isDirectory: stats.isDirectory(),
+      path: path.join(dir, file),
+      stats: tempStats,
+      isDirectory: tempStats.isDirectory(),
       children: []
     })
   }
   event.sender.send('open-dir-reply', ret)
+})
+
+ipcMain.on('create-previewHTML', (event, tempHtml) => {
+  const html = tempHtml.replace(/\.\/oasisl/g, '../oasisl')
+  const fileName = `${new Date().getTime()}.html`
+  const filePath = `${process.cwd()}\\cache\\${fileName}`
+  console.log(html)
+  console.log(fileName)
+  console.log(process.cwd())
+  fs.writeFileSync(filePath, html)
+  event.sender.send('create-previewHTML-reply', filePath)
 })

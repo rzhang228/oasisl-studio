@@ -1,9 +1,9 @@
 export default {
   // 节点唯一标识
   id: '',
-  // 节点类型，1：原生dom；2：oasisl基本元素；3：oasisl组件；4：echarts
+  // 节点类型，1：原生dom；2：布局；3：oasisl基本元素；4：oasisl组件；5：echarts
   type: '',
-  // type=1：当前dom标签名；否则：最外层dom标签名
+  // type=1：当前dom标签名；否则：最外层dom标签名 （空字符串表示文本节点）
   tagName: '',
   // type=3：组件名（用于初始化组件）
   moduleName: '',
@@ -11,7 +11,7 @@ export default {
   moduleChineseName: '',
   // type=1：当前dom属性；否则：最外层dom属性
   attr: {},
-  // 标签内文本内容
+  // 标签内文本内容（仅在文本节点时有值）
   text: '',
   // type=1：当前dom样式对象；否则：最外层dom样式对象（仅表示行内样式）
   // style: {},

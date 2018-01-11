@@ -17,10 +17,7 @@
  * onClick={this::handleChange}
  *
  * 例子3：在构造函数中声明（推荐，避免每次render都重复绑定）
- * constructor (props) {
- *   super(props)
- *   this.handleChange = handleChange.bind(this)
- * }
+ * handleChange = (event) => {}
  * 之后就可以这样写了
  * onClick={this.handleChange}
  */

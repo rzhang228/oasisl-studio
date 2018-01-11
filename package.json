@@ -4,10 +4,14 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "build-dev": "webpack --progress --watch --hide-modules --config ./build/webpack.dev.conf",
-    "dev": "webpack-dev-server --watch --config ./build/webpack.dev.conf",
-    "start-dev": "set NODE_ENV=development && node main.dev",
-    "start": "set NODE_ENV=production && webpack --progress --hide-modules --config ./build/webpack.prod.conf && electron ."
+    "build-renderer-dev": "webpack --progress --watch --hide-modules --config ./build/webpack.renderer.dev.conf",
+    "build-main-dev": "webpack --progress --watch --hide-modules --config ./build/webpack.main.base.conf",
+    "build-renderer-prod": "webpack --progress --hide-modules --config ./build/webpack.renderer.prod.conf",
+    "build-main-prod": "webpack --progress --hide-modules --config ./build/webpack.main.prod.conf",
+    "start-prod": "cross-env NODE_ENV=production electron .",
+    "build-dev": "npm-run-all --parallel build-main-dev build-renderer-dev",
+    "start-dev": "cross-env NODE_ENV=development node main.dev",
+    "start": "npm-run-all build-main-prod build-renderer-prod start-prod"
   },
   "dependencies": {
     "electron": "^1.7.9",
@@ -34,6 +38,7 @@
     "chokidar": "^2.0.0",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.3",
+    "cross-env": "^5.1.3",
     "css-loader": "^0.28.7",
     "electron-connect": "^0.6.2",
     "eslint": "^4.9.0",
@@ -48,6 +53,7 @@
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
+    "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
     "precss": "^2.0.0",
     "style-loader": "^0.19.0",

@@ -1,17 +1,17 @@
 const chokidar = require('chokidar')
 const electron = require('electron-connect').server.create()
 
-const mainWatcher = chokidar.watch('./src', {
-  ignored: './src/renderer'
-})
-
 electron.start()
 
+const mainWatcher = chokidar.watch('./dist/main')
+
 mainWatcher.on('change', () => {
-  electron.restart()
+  setTimeout(() => {
+    electron.restart()
+  }, 0)
 })
 
-const rendererWatcher = chokidar.watch('./dist')
+const rendererWatcher = chokidar.watch('./dist/renderer')
 
 rendererWatcher.on('change', () => {
   electron.reload()

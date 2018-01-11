@@ -6,7 +6,7 @@ import File from 'COMPONENT/File'
 import Page from 'COMPONENT/Page'
 import DevTool from 'COMPONENT/DevTool'
 import Properties from 'COMPONENT/Properties'
-import style from './App.scss'
+import './App.scss'
 
 export default () => {
   let dom1
@@ -14,12 +14,12 @@ export default () => {
   let dom3
   let dom4
   return (
-    <div className={style['app']}>
-      <div className={style['header']}>
+    <div className="app">
+      <div className="header">
         <Header />
       </div>
-      <div className={style['body']}>
-        <div className={style['left']} ref={(dom) => { dom1 = dom }}>
+      <div className="body">
+        <div className="left" ref={(dom) => { dom1 = dom }}>
           <DragBlock
             type="vertical"
             position="right"
@@ -27,7 +27,7 @@ export default () => {
             flexDirection="column"
             target={() => dom1}
           >
-            <div className={style['elements-container']} ref={(dom) => { dom2 = dom }}>
+            <div className="elements-wrapper" ref={(dom) => { dom2 = dom }}>
               <DragBlock
                 position="bottom"
                 target={() => dom2}
@@ -35,16 +35,16 @@ export default () => {
                 <Elements />
               </DragBlock>
             </div>
-            <div className={style['file-container']}>
+            <div className="file-wrapper">
               <File />
             </div>
           </DragBlock>
         </div>
-        <div className={style['center']}>
-          <div className={style['page-container']}>
+        <div className="center">
+          <div className="page-wrapper">
             <Page />
           </div>
-          <div className={style['devtool-container']} ref={(dom) => { dom3 = dom }}>
+          <div className="devtool-wrapper" ref={(dom) => { dom3 = dom }}>
             <DragBlock
               direction={1}
               target={() => dom3}
@@ -53,7 +53,7 @@ export default () => {
             </DragBlock>
           </div>
         </div>
-        <div className={style['right']} ref={(dom) => { dom4 = dom }}>
+        <div className="right" ref={(dom) => { dom4 = dom }}>
           <DragBlock
             type="vertical"
             position="left"

@@ -1,4 +1,5 @@
 import defaultOption from './default'
+import singleTagDom from './singleTagDom'
 
 /**
  * 虚拟dom类
@@ -7,9 +8,9 @@ import defaultOption from './default'
  */
 class VNode {
   constructor(option) {
-    if (!option['id'])
+    if (!option.id)
       throw new Error('id is required')
-    if (!option['type'])
+    if (!option.type)
       throw new Error('type is required')
 
     Object.assign(this, defaultOption, option)
@@ -59,13 +60,30 @@ class VNode {
   }
 
   /**
-   * 连同children转为html字符串
+   * 转为单标签html字符串（不包括children，单tag）
    * 
+   * @param {Boolean} withId
    * @returns 
    * @memberof VNode
    */
-  toHTML() {
-    // TODO
+  toHTML(withId = false) {
+    if (this.tagName === '')
+      return this.text
+
+    let str = `<${this.tagName}`
+    for (const attrName in this.attr)
+      if ({}.hasOwnProperty.call(this.attr, attrName))
+        str += ` ${attrName}="${this.attr[attrName]}"`
+
+    if (withId)
+      str += ` data-os-id="${this.id}"`
+
+    if (singleTagDom.indexOf(this.tagName) !== -1)
+      str += ' />'
+    else
+      str += '>'
+
+    return str
   }
 
   /**
@@ -76,7 +94,7 @@ class VNode {
    * @memberof VNode
    */
   addChild(vNode, index = vNode.children.length) {
-    this['children'].splice(index, 0, vNode)
+    this.children.splice(index, 0, vNode)
   }
 }
 

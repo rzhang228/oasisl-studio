@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import style from './index.scss'
+import './index.scss'
 
 class Elements extends Component {
   render() {
     return (
-      <div className={style['elements-container']} />
+      <div className="elements-container" />
     )
   }
 }

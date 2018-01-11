@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import style from './index.scss'
+import './index.scss'
 
 class DragBlock extends Component {
   onDragStart = (event) => {
@@ -64,10 +64,10 @@ class DragBlock extends Component {
         flexDirection: this.props.flexDirection
       }
     return (
-      <div className={style['dragWrapper']} style={wrapperStyle}>
+      <div className="dragWrapper" style={wrapperStyle}>
         {this.props.children}
         <div
-          className={`${style['dragBar']} ${style[this.props.type]}`}
+          className={`dragBar ${this.props.type}`}
           style={barStyle}
           onMouseDown={this.onDragStart}
           role="presentation"
