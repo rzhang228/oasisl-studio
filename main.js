@@ -17,7 +17,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1300,
     height: 900,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
     // icon: iconPath
   })
 

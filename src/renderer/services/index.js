@@ -1,5 +1,5 @@
-const { EventEmitter } = require('events')
-const { ipcRenderer } = require('electron')
+import { EventEmitter } from 'events'
+import { ipcRenderer } from 'electron'
 
 const service = new EventEmitter()
 
@@ -24,15 +24,11 @@ service.on('create-previewHTML', (html, cb) => {
   })
 })
 
+service.on('delete-file', (path) => {
+  ipcRenderer.send('delete-file', path)
+})
+
 export default {
-  on(name, cb) {
-    service.on(name, cb)
-  },
-
-  once(name, cb) {
-    service.once(name, cb)
-  },
-
   trigger(name, ...args) {
     service.emit(name, ...args)
   }

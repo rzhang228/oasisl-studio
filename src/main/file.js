@@ -5,6 +5,8 @@ const { ipcMain, dialog } = require('electron')
 
 const desktopPath = path.join(os.homedir(), 'Desktop')
 
+const { log } = console
+
 ipcMain.on('open-file', async (event) => {
   const filePaths = await dialog.showOpenDialog({
     title: '选择文件',
@@ -51,9 +53,14 @@ ipcMain.on('create-previewHTML', (event, tempHtml) => {
   const html = tempHtml.replace(/\.\/oasisl/g, '../oasisl')
   const fileName = `${new Date().getTime()}.html`
   const filePath = `${process.cwd()}\\cache\\${fileName}`
-  console.log(html)
-  console.log(fileName)
-  console.log(process.cwd())
   fs.writeFileSync(filePath, html)
   event.sender.send('create-previewHTML-reply', filePath)
+})
+
+ipcMain.on('delete-file', (event, filePath) => {
+  try {
+    fs.unlinkSync(filePath)
+  } catch (error) {
+    log('删除文件失败')
+  }
 })

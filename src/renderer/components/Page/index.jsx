@@ -12,8 +12,23 @@ const connector = createContainer(
 )
 
 class Page extends Component {
+  componentDidUpdate() {
+    const currentWindow = this.activeIframe.contentWindow
+    currentWindow.onload = () => {
+      // 需要做下截流
+      currentWindow.document.onmousemove = (event) => {
+        console.log(event.target.getBoundingClientRect())
+      }
+    }
+  }
+
   changeIndex = (event) => {
-    this.props.setActiveIndex(+event.target.getAttribute('data-index'))
+    this.props.setActiveIndex(+event.currentTarget.getAttribute('data-index'))
+  }
+
+  close = (event) => {
+    event.stopPropagation()
+    this.props.removeVNodeTree(+event.currentTarget.parentNode.getAttribute('data-index'))
   }
 
   render() {
@@ -28,10 +43,17 @@ class Page extends Component {
                 className={`tab${index === activeIndex ? ' active' : ''}`}
                 data-index={index}
                 onClick={this.changeIndex}
+                key={vNodeTree.key}
                 role="presentation"
               >
                 {vNodeTree.title} {vNodeTree.unsaved ? '*' : ''}
-                <span className="close-icon"><i className="oasicon oasicon-close" /></span>
+                <span
+                  className="close-icon"
+                  onClick={this.close}
+                  role="presentation"
+                >
+                  <i className="oasicon oasicon-close" />
+                </span>
               </div>
             ))
           }
@@ -44,8 +66,10 @@ class Page extends Component {
                   className={`iframe${index === activeIndex ? ' current' : ''}`}
                   title={vNodeTree.title}
                   src={vNodeTree.path}
+                  key={vNodeTree.key}
+                  ref={(el) => { if (index === activeIndex) this.activeIframe = el }}
                 >
-                  content
+                  Content
                 </iframe>
               ))
             }
@@ -62,7 +86,8 @@ Page.propTypes = {
     activeIndex: PropTypes.number,
     list: PropTypes.arrayOf(PropTypes.instanceOf(VNodeTree))
   }).isRequired,
-  setActiveIndex: PropTypes.func.isRequired
+  setActiveIndex: PropTypes.func.isRequired,
+  removeVNodeTree: PropTypes.func.isRequired
 }
 
 export default connector(Page)

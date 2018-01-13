@@ -176,6 +176,16 @@ class VNodeTree {
   setTitle(title) {
     this.title = title
   }
+
+  /**
+   * 设置key值，用于react
+   * 
+   * @param {any} key 
+   * @memberof VNodeTree
+   */
+  setKey(key) {
+    this.key = key
+  }
 }
 
 export default VNodeTree
