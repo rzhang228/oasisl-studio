@@ -6,9 +6,7 @@ electron.start()
 const mainWatcher = chokidar.watch('./dist/main')
 
 mainWatcher.on('change', () => {
-  setTimeout(() => {
-    electron.restart()
-  }, 0)
+  electron.restart()
 })
 
 const rendererWatcher = chokidar.watch('./dist/renderer')

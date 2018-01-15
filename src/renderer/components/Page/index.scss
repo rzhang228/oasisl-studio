@@ -9,22 +9,33 @@ $backgroundColor: #31373A;
   background-color: $backgroundColor;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) inset;
 
+  .tabs {
+    display: flex;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
   .tab {
-    float: left;
+    flex-shrink: 0;
     background-color: #353C3F;
-    cursor: default;
+    cursor: pointer;
 
     &.active {
       background: linear-gradient(#647177, #525E64);
       border-radius: 2px 2px 0;
     }
 
-    .close-icon {
+    &:hover .close-icon {
+      visibility: visible;
+    }
 
+    .close-icon {
+      visibility: hidden;
     }
   }
 
   .iframe-wrapper {
+    position: relative;
     flex-grow: 1;
     overflow: auto
   }
@@ -41,6 +52,47 @@ $backgroundColor: #31373A;
       &.current {
         display: block;
       }
+    }
+  }
+
+  .iframe-jusitify {
+    position: relative;
+    height: 100%;
+  }
+
+  .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+
+    div {
+      position: absolute;
+      border: 0 solid;
+    }
+
+    .main {
+      background: #4492ED;
+      opacity: 0.4;
+      z-index: 4;
+    }
+
+    .padding {
+      border-color: #B8E0B8;
+      opacity: 0.85;
+      z-index: 3;
+    }
+
+    .border {
+      border-color: #ffffB3;
+      opacity: 0.85;
+      z-index: 2;
+    }
+
+    .margin {
+      border-color: #F2D59F;
+      opacity: 0.85;
+      z-index: 1;
     }
   }
 }

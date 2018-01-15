@@ -61,6 +61,6 @@ ipcMain.on('delete-file', (event, filePath) => {
   try {
     fs.unlinkSync(filePath)
   } catch (error) {
-    log('删除文件失败')
+    log(`${filePath}文件删除失败!`)
   }
 })

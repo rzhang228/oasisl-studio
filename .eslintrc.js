@@ -5,6 +5,9 @@ module.exports = {
     "browser": true,
     "node": true
   },
+  "globals": {
+    "oasisl": true
+  },
   "extends": "airbnb",
   "rules": {
     // 不使用分号

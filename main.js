@@ -1,7 +1,11 @@
 const path = require('path')
 const url = require('url')
 
-const { app, Menu, BrowserWindow } = require('electron')
+const {
+  app,
+  Menu,
+  BrowserWindow
+} = require('electron')
 
 const config = require('./build/config')
 
@@ -35,7 +39,9 @@ function createWindow() {
   switch (process.env.NODE_ENV.trim()) {
     case 'development':
       // 链接electron-connect
-      const { client } = require('electron-connect')
+      const {
+        client
+      } = require('electron-connect')
       client.create(win)
       // 加载react-devtool和redux-devtool
       BrowserWindow.addDevToolsExtension(config.ReactDevToolExtensionPath)

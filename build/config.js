@@ -1,6 +1,8 @@
+const path = require('path')
+
+const pluginsPath = path.join(__dirname, '../plugins')
+
 module.exports = {
-  /* ReactDevToolExtensionPath: 'C:/Users/xk/AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/2.5.2_0',
-  ReduxDevToolExtensionPath: 'C:/Users/xk/AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.1_0' */
-  ReactDevToolExtensionPath: 'C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/2.5.2_0',
-  ReduxDevToolExtensionPath: 'C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.1_0'
+  ReactDevToolExtensionPath: path.resolve(pluginsPath, 'react-dev-tool/2.5.2_0'),
+  ReduxDevToolExtensionPath: path.resolve(pluginsPath, 'redux-dev-tool/2.15.1_0')
 }

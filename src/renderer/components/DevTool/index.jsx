@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Dom from './Dom'
+import Style from './Style'
 import './index.scss'
 
-class DevTool extends Component {
-  render() {
-    return (
-      <div className="devtool-container" />
-    )
-  }
-}
-
-export default DevTool
+export default () => (
+  <div className="devtool-container">
+    <Dom />
+    <Style />
+  </div>
+)
