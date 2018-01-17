@@ -78,12 +78,18 @@ class VNode {
     if (withId)
       str += ` data-os-id="${this.id}"`
 
-    if (singleTagDom.indexOf(this.tagName) !== -1)
+    if (this.isSingleTag())
       str += ' />'
     else
       str += '>'
 
     return str
+  }
+
+  isSingleTag() {
+    if (singleTagDom.indexOf(this.tagName) !== -1)
+      return true
+    return false
   }
 
   /**

@@ -3,6 +3,10 @@
  */
 export default {
   fileObj: {},
+  domId: {
+    active: 0,
+    selected: 0
+  },
   vNodeTreeList: {
     activeIndex: -1,
     list: []

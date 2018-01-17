@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import fileReducer from './file'
 import vNodeTreeReducer from './vNodeTree'
+import domIdReducer from './domId'
 
 const reducers = {
   fileObj: fileReducer,
-  vNodeTreeList: vNodeTreeReducer
+  vNodeTreeList: vNodeTreeReducer,
+  domId: domIdReducer
 }
 
 /**
