@@ -22,12 +22,8 @@
     content: ' '
   }
 
-  .dom-ele.open>.dom-line>.oasicon {
+  .dom-ele.open>.dom-line .oasicon {
     transform: rotate(0deg)
-  }
-
-  .dom-ele.open>.dom-children {
-    // height: auto;
   }
 
   .dom-line {
@@ -37,7 +33,6 @@
   }
 
   .dom-children {
-    // height: 0;
     overflow: hidden;
   }
 

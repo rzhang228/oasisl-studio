@@ -16,7 +16,9 @@ const autoOpenTag = [
   'body'
 ]
 
-const toggleAnimateTime = 1000
+const toggleAnimateTime = 300
+
+let timeoutList = []
 
 /**
  * type  0:展开;1:收起
@@ -28,14 +30,20 @@ const toggleAnimateTime = 1000
 function toggleAnimate(dom, type) {
   const { style } = dom
 
+  for (const timeout of timeoutList)
+    clearTimeout(timeout)
+  timeoutList = []
+
   if (type) {
     style['max-height'] = `${+window.getComputedStyle(dom).height.slice(0, -2)}px`
-    style['max-height'] = '0px'
+    setTimeout(() => {
+      style['max-height'] = '0px'
+    }, 0)
   } else {
     style['max-height'] = `${dom.scrollHeight}px`
-    setTimeout(() => {
+    timeoutList.push(setTimeout(() => {
       style['max-height'] = 'none'
-    }, toggleAnimateTime)
+    }, toggleAnimateTime))
   }
 }
 
@@ -45,7 +53,9 @@ class Dom extends Component {
       return (
         <div className="dom-ele" data-os-id={vNode.id} key={vNode.id}>
           <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>
-            <span className="text">{`${vNode.text}`}</span>
+            <span className="dom-content">
+              <span className="text">{`${vNode.text}`}</span>
+            </span>
           </p>
         </div>
       )
@@ -63,9 +73,11 @@ class Dom extends Component {
       return (
         <div className="dom-ele" data-os-id={vNode.id} key={vNode.id}>
           <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>
-            {`<${vNode.tagName}`}
-            {attrList}
-            {' />'}
+            <span className="dom-content">
+              {`<${vNode.tagName}`}
+              {attrList}
+              {' />'}
+            </span>
           </p>
         </div>
       )
@@ -74,9 +86,11 @@ class Dom extends Component {
       return (
         <div className="dom-ele" data-os-id={vNode.id} key={vNode.id}>
           <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>
-            {`<${vNode.tagName}`}
-            {attrList}
-            {`></${vNode.tagName}>`}
+            <span className="dom-content">
+              {`<${vNode.tagName}`}
+              {attrList}
+              {`></${vNode.tagName}>`}
+            </span>
           </p>
         </div>
       )
@@ -88,10 +102,12 @@ class Dom extends Component {
     return (
       <div className={`dom-ele has-child${autoOpenTag.indexOf(vNode.tagName) !== -1 ? ' open' : ''}`} data-os-id={vNode.id} key={vNode.id}>
         <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>
-          <i className="oasicon oasicon-down" onClick={this.toggleFold} role="presentation" />
-          {`<${vNode.tagName}`}
-          {attrList}
-          {'>'}
+          <span className="dom-content">
+            <i className="oasicon oasicon-down" onClick={this.toggleFold} role="presentation" />
+            {`<${vNode.tagName}`}
+            {attrList}
+            {'>'}
+          </span>
         </p>
         <div
           className="dom-children"
@@ -102,13 +118,17 @@ class Dom extends Component {
         >
           {childList}
         </div>
-        <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>{`</${vNode.tagName}>`}</p>
+        <p className="dom-line" onMouseEnter={this.handleDomEnter} onMouseLeave={this.handleDomLeave}>
+          <span className="dom-content">
+            {`</${vNode.tagName}>`}
+          </span>
+        </p>
       </div>
     )
   }
 
   toggleFold = (event) => {
-    const domEle = event.target.parentElement.parentElement
+    const domEle = event.target.parentElement.parentElement.parentElement
     const domEleClassList = domEle.classList
     const domChildren = domEle.querySelector('.dom-children')
     if (domEleClassList.contains('open')) {

@@ -25,7 +25,7 @@ $backgroundColor: #31373A;
       border-radius: 2px 2px 0;
     }
 
-    &:hover .close-icon {
+    &:hover, &.active .close-icon {
       visibility: visible;
     }
 
